@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BoringXMLEditor - 地質調査ボーリングXMLエディタ</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Meiryo", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.8;
+    }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+      color: #fff;
+      padding: 64px 24px;
+      text-align: center;
+    }
+    .hero h1 { font-size: 2rem; margin-bottom: 16px; }
+    .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+
+    /* Section */
+    section { padding: 48px 0; }
+    section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 24px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--primary);
+      display: inline-block;
+    }
+
+    /* Features */
+    .features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    .feature {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .feature h3 { font-size: 1rem; margin-bottom: 8px; }
+    .feature p { font-size: 0.9rem; color: var(--text-muted); }
+
+    /* Pricing */
+    .pricing-card {
+      background: var(--card-bg);
+      border: 2px solid var(--primary);
+      border-radius: 12px;
+      padding: 32px;
+      text-align: center;
+      max-width: 400px;
+      margin: 24px auto 0;
+    }
+    .pricing-card .price { font-size: 2.5rem; font-weight: bold; color: var(--primary); }
+    .pricing-card .period { font-size: 1rem; color: var(--text-muted); }
+    .pricing-card ul {
+      text-align: left;
+      margin: 20px 0;
+      list-style: none;
+    }
+    .pricing-card li { padding: 6px 0; font-size: 0.95rem; }
+    .pricing-card li::before { content: "\2713\0020"; color: var(--primary); font-weight: bold; }
+
+    /* Terms */
+    .terms { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-top: 16px; }
+    .terms h3 { font-size: 1.1rem; margin: 16px 0 8px; }
+    .terms h3:first-child { margin-top: 0; }
+    .terms p, .terms li { font-size: 0.9rem; color: var(--text-muted); }
+    .terms ul { padding-left: 20px; margin: 8px 0; }
+
+    /* Contact */
+    .contact-info {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-top: 16px;
+    }
+    .contact-info a { color: var(--primary); text-decoration: none; }
+    .contact-info a:hover { text-decoration: underline; }
+
+    /* Footer */
+    footer {
+      background: #1e293b;
+      color: #94a3b8;
+      text-align: center;
+      padding: 24px;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      .features { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="container">
+      <h1>BoringXMLEditor</h1>
+      <p>日本の地質調査ボーリングXMLデータを編集・管理するデスクトップソフトウェア</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <h2>主な機能</h2>
+      <div class="features">
+        <div class="feature">
+          <h3>複数DTDバージョン対応</h3>
+          <p>DTD 2.10、3.00、4.00 を自動検出し、適切なフォーマットで処理します。</p>
+        </div>
+        <div class="feature">
+          <h3>直感的なUI</h3>
+          <p>タブ形式のインターフェースで、調査情報・土層情報・基本情報を効率的に編集できます。</p>
+        </div>
+        <div class="feature">
+          <h3>XML読み込み・保存</h3>
+          <p>日本語XMLデータの読み込み、編集、保存をシームレスに行えます。</p>
+        </div>
+        <div class="feature">
+          <h3>プレビュー・PDF出力</h3>
+          <p>ボーリング柱状図のプレビューとPDF・DXF形式でのエクスポートに対応しています。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #f1f5f9;">
+    <div class="container">
+      <h2>料金プラン</h2>
+      <div class="pricing-card">
+        <div class="price">&yen;3,000</div>
+        <div class="period">/ 月（税込）</div>
+        <ul>
+          <li>全機能の利用</li>
+          <li>複数DTDバージョン対応</li>
+          <li>PDF・DXFエクスポート</li>
+          <li>ソフトウェアアップデート</li>
+          <li>いつでもキャンセル可能</li>
+        </ul>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">
+          購入時に即座に請求されます。月単位の自動更新です。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="terms">
+    <div class="container">
+      <h2>利用規約・返金ポリシー</h2>
+      <div class="terms">
+        <h3>サービス概要</h3>
+        <p>BoringXMLEditor（以下「本ソフトウェア」）は、地質調査ボーリングXMLデータの編集・管理を目的としたデスクトップアプリケーションです。月額サブスクリプション方式でライセンスを提供します。</p>
+
+        <h3>ライセンス</h3>
+        <ul>
+          <li>ライセンスは購入者のマシン1台に紐づきます。</li>
+          <li>ライセンスキーの第三者への譲渡・共有は禁止します。</li>
+          <li>サブスクリプションは月単位で自動更新されます。</li>
+        </ul>
+
+        <h3>支払い</h3>
+        <ul>
+          <li>決済は Stripe を通じて安全に処理されます。</li>
+          <li>購入時に即座に請求され、以降は毎月同日に自動課金されます。</li>
+          <li>価格は予告なく変更される場合があります。既存のサブスクリプションには次回更新時から適用されます。</li>
+        </ul>
+
+        <h3>キャンセル・返金ポリシー</h3>
+        <ul>
+          <li>サブスクリプションはいつでもキャンセル可能です。</li>
+          <li>キャンセル後も、現在の請求期間の終了まで本ソフトウェアをご利用いただけます。</li>
+          <li>購入後7日以内で、かつ本ソフトウェアの重大な不具合により利用できない場合に限り、返金をご相談いただけます。</li>
+          <li>返金のご相談は GitHub Issues よりお問い合わせください。</li>
+        </ul>
+
+        <h3>免責事項</h3>
+        <ul>
+          <li>本ソフトウェアは「現状有姿」で提供され、特定目的への適合性を保証するものではありません。</li>
+          <li>本ソフトウェアの使用により生じた損害について、開発者は一切の責任を負いません。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #f1f5f9;">
+    <div class="container">
+      <h2>お問い合わせ</h2>
+      <div class="contact-info">
+        <p>ご質問・不具合報告・返金のご相談は GitHub Issues よりお願いいたします。</p>
+        <p style="margin-top: 12px;">
+          <a href="https://github.com/mipcivil/BoringXMLTool-JP/issues" target="_blank" rel="noopener">
+            GitHub Issues &rarr;
+          </a>
+        </p>
+        <p style="margin-top: 8px;">
+          <a href="https://github.com/mipcivil/BoringXMLTool-JP" target="_blank" rel="noopener">
+            GitHub リポジトリ &rarr;
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 BoringXMLEditor. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
