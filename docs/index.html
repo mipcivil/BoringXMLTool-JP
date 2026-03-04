@@ -209,6 +209,81 @@
     .terms p, .terms li { font-size: 0.9rem; color: var(--text-muted); }
     .terms ul { padding-left: 20px; margin: 8px 0; }
 
+    /* Purchase Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 420px;
+      width: 90%;
+      position: relative;
+    }
+    .modal h3 { font-size: 1.2rem; margin-bottom: 16px; }
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+    .modal label { display: block; font-size: 0.9rem; margin-bottom: 6px; font-weight: bold; }
+    .modal input[type="email"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+    .modal input[type="email"]:focus { border-color: var(--primary); outline: none; }
+    .modal .plan-summary {
+      background: #f1f5f9;
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+    }
+    .modal .plan-summary strong { color: var(--primary); }
+    .modal .btn-submit {
+      width: 100%;
+      padding: 12px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .modal .btn-submit:hover { background: var(--primary-dark); }
+    .modal .btn-submit:disabled { background: #94a3b8; cursor: not-allowed; }
+    .modal .error-msg {
+      color: #dc2626;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+      display: none;
+    }
+    .modal .note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+      text-align: center;
+    }
+
     /* Contact */
     .contact-info {
       background: var(--card-bg);
@@ -324,13 +399,13 @@
         </div>
         <div class="step">
           <div class="step-number">3</div>
-          <h3>.BGEO対応が必要な場合 <span class="paid-label">有料</span></h3>
-          <p>.BGEOファイルの読み書きが必要な場合は、アプリ内のライセンス画面から購入手続きを行います。</p>
+          <h3>有料版が必要な場合 <span class="paid-label">有料</span></h3>
+          <p>.BGEOファイルの読み書きやDXFエクスポートが必要な場合は、<a href="#pricing" style="color: var(--primary);">このページ</a>またはアプリ内から購入できます。</p>
         </div>
         <div class="step">
           <div class="step-number">4</div>
           <h3>ライセンス適用</h3>
-          <p>購入後にメールで届く <code>license.json</code> をアプリのライセンス画面で読み込むと、.BGEO機能が有効になります。</p>
+          <p>購入後にメールで届くライセンスキーをアプリのライセンス画面で入力すると、有料版機能が有効になります。</p>
         </div>
       </div>
     </div>
@@ -368,6 +443,7 @@
           <p style="font-size: 0.8rem; color: var(--text-muted);">
             月単位の自動更新・いつでもキャンセル可
           </p>
+          <button class="btn btn-blue" style="width: 100%; margin-top: 12px; padding: 10px 16px; font-size: 0.9rem; border: none; cursor: pointer;" onclick="openPurchase('monthly')">購入する</button>
         </div>
         <div class="pricing-card">
           <div class="plan-name">年額プラン</div>
@@ -383,10 +459,11 @@
           <p style="font-size: 0.8rem; color: var(--text-muted);">
             年単位の自動更新・いつでもキャンセル可
           </p>
+          <button class="btn btn-blue" style="width: 100%; margin-top: 12px; padding: 10px 16px; font-size: 0.9rem; border: none; cursor: pointer;" onclick="openPurchase('yearly')">購入する</button>
         </div>
       </div>
       <div class="pricing-note">
-        有料版のライセンス購入はアプリ内から行います。まずは無料版をダウンロードしてお試しください。
+        このページまたはアプリ内からライセンスを購入できます。まずは無料版をダウンロードしてお試しください。
       </div>
       <p style="text-align: center; margin-top: 12px; font-size: 0.85rem; color: var(--text-muted);">
         ※ 現在ベータ版として公開中です。正式リリース時に価格が変更される場合があります。
@@ -451,9 +528,89 @@
     </div>
   </section>
 
+  <!-- Purchase Modal -->
+  <div class="modal-overlay" id="purchaseModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closePurchase()">&times;</button>
+      <h3>ライセンス購入</h3>
+      <div class="plan-summary" id="planSummary"></div>
+      <div class="error-msg" id="purchaseError"></div>
+      <label for="purchaseEmail">メールアドレス</label>
+      <input type="email" id="purchaseEmail" placeholder="your@email.com" autocomplete="email">
+      <button class="btn-submit" id="purchaseSubmit" onclick="submitPurchase()">Stripe で購入手続きへ</button>
+      <p class="note">決済は Stripe で安全に処理されます。<br>購入後、ライセンスキーがメールで届きます。</p>
+    </div>
+  </div>
+
   <footer>
     <p>&copy; 2026 BoringXMLEditor. All rights reserved.</p>
   </footer>
+
+  <script>
+    var API_URL = "https://boringxml-license-api.miaipwork.workers.dev";
+    var selectedPlan = "monthly";
+
+    function openPurchase(plan) {
+      selectedPlan = plan;
+      var label = plan === "yearly" ? "年額プラン: ¥24,000 / 年（税込）" : "月額プラン: ¥2,000 / 月（税込）";
+      document.getElementById("planSummary").innerHTML = "プラン: <strong>" + label + "</strong>";
+      document.getElementById("purchaseError").style.display = "none";
+      document.getElementById("purchaseEmail").value = "";
+      document.getElementById("purchaseSubmit").disabled = false;
+      document.getElementById("purchaseSubmit").textContent = "Stripe で購入手続きへ";
+      document.getElementById("purchaseModal").classList.add("active");
+    }
+
+    function closePurchase() {
+      document.getElementById("purchaseModal").classList.remove("active");
+    }
+
+    // Close modal on overlay click
+    document.getElementById("purchaseModal").addEventListener("click", function(e) {
+      if (e.target === this) closePurchase();
+    });
+
+    function submitPurchase() {
+      var email = document.getElementById("purchaseEmail").value.trim();
+      var errorEl = document.getElementById("purchaseError");
+      var submitBtn = document.getElementById("purchaseSubmit");
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errorEl.textContent = "有効なメールアドレスを入力してください。";
+        errorEl.style.display = "block";
+        return;
+      }
+
+      errorEl.style.display = "none";
+      submitBtn.disabled = true;
+      submitBtn.textContent = "処理中...";
+
+      fetch(API_URL + "/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email, plan: selectedPlan })
+      })
+        .then(function(res) { return res.json().then(function(d) { return { ok: res.ok, data: d }; }); })
+        .then(function(result) {
+          if (result.ok && result.data.checkout_url) {
+            window.location.href = result.data.checkout_url;
+          } else {
+            throw new Error(result.data.error || "エラーが発生しました。");
+          }
+        })
+        .catch(function(err) {
+          errorEl.textContent = err.message || "通信エラーが発生しました。しばらくしてから再度お試しください。";
+          errorEl.style.display = "block";
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Stripe で購入手続きへ";
+        });
+    }
+
+    // Enter key support
+    document.getElementById("purchaseEmail").addEventListener("keydown", function(e) {
+      if (e.key === "Enter") submitPurchase();
+    });
+  </script>
 
 </body>
 </html>
