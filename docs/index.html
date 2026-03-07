@@ -715,15 +715,15 @@
           <span class="badge badge-platform">Windows 10/11 対応</span>
           <span class="badge badge-beta">Beta</span>
         </div>
-        <h1>ボーリングXML編集の手間を減らす。</h1>
-        <p class="hero-subtitle">DTD 2.10 / 3.00 / 4.00 対応のXML編集ツール。</p>
-        <p class="hero-desc">XMLタグの手編集をタブ画面での入力に置き換えます。<br>インストール不要。ZIPを展開してすぐに使えます。</p>
+        <h1>BoringXMLEditor</h1>
+        <p class="hero-subtitle">ボーリングXMLをタブ画面で編集できるWindowsアプリです。</p>
+        <p class="hero-desc">DTD 2.10 / 3.00 / 4.00 対応。インストール不要、ZIPを展開してすぐ使えます。</p>
         <div class="hero-buttons">
-          <a class="btn btn-primary" href="https://github.com/mipcivil/BoringXMLTool-JP/releases/latest" target="_blank" rel="noopener">無料でダウンロード</a>
+          <a class="btn btn-primary" href="https://github.com/mipcivil/BoringXMLTool-JP/releases/latest" target="_blank" rel="noopener">ダウンロード</a>
           <a class="btn btn-outline" href="#features">機能を見る</a>
         </div>
-        <div class="hero-version">
-          v1.0.0-beta.5 — <a href="https://github.com/mipcivil/BoringXMLTool-JP/releases" target="_blank" rel="noopener">更新履歴</a>
+        <div class="hero-version" id="heroVersion">
+          <a href="https://github.com/mipcivil/BoringXMLTool-JP/releases" target="_blank" rel="noopener">更新履歴</a>
         </div>
       </div>
     </div>
@@ -1089,6 +1089,18 @@
   </footer>
 
   <script>
+    // GitHub APIから最新バージョンを取得
+    fetch("https://api.github.com/repos/mipcivil/BoringXMLTool-JP/releases/latest")
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.tag_name) {
+          var el = document.getElementById("heroVersion");
+          var date = data.published_at ? data.published_at.slice(0, 10) : "";
+          el.insertAdjacentHTML("afterbegin", data.tag_name + (date ? " (" + date + ")" : "") + " — ");
+        }
+      })
+      .catch(function() {});
+
     function openLightbox(src) {
       document.getElementById("lightboxImg").src = src;
       document.getElementById("lightbox").classList.add("active");
