@@ -71,26 +71,32 @@
 
     /* ========== Hero ========== */
     .hero {
-      background: url('標題情報画面.png') center center / cover no-repeat;
       color: var(--text);
       padding: 56px 32px 48px;
       border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(255,255,255,0.72);
-      backdrop-filter: blur(2px);
     }
     .hero .container {
-      max-width: 720px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
+      max-width: 1120px;
+      display: flex;
+      align-items: center;
+      gap: 48px;
     }
-    .hero-badges { display: flex; gap: 8px; margin-bottom: 16px; justify-content: center; }
+    .hero-text {
+      flex: 1;
+      min-width: 0;
+    }
+    .hero-image {
+      display: block !important;
+      flex: 1.2;
+      min-width: 0;
+    }
+    .hero-image img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      border: 1px solid var(--border);
+    }
+    .hero-badges { display: flex; gap: 8px; margin-bottom: 16px; }
     .badge {
       display: inline-block;
       padding: 3px 12px;
@@ -118,8 +124,7 @@
       margin-bottom: 28px;
       line-height: 1.8;
     }
-    .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
-    .hero-image { display: none; }
+    .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
     .hero-version {
       margin-top: 20px;
       font-size: 0.78rem;
@@ -127,6 +132,12 @@
     }
     .hero-version a { color: var(--primary); text-decoration: none; }
     .hero-version a:hover { text-decoration: underline; }
+    @media (max-width: 900px) {
+      .hero .container { flex-direction: column; gap: 32px; text-align: center; }
+      .hero-badges { justify-content: center; }
+      .hero-buttons { justify-content: center; }
+      .hero-image { max-width: 520px; }
+    }
 
     /* ========== Buttons ========== */
     .btn {
@@ -685,6 +696,7 @@
     /* ========== Responsive ========== */
     @media (max-width: 960px) {
       .hero { padding: 48px 24px 40px; }
+      .hero-image { flex: 1; }
       .steps-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
@@ -733,6 +745,9 @@
         <div class="hero-version" id="heroVersion">
           <a href="https://github.com/mipcivil/BoringXMLTool-JP/releases" target="_blank" rel="noopener">更新履歴</a>
         </div>
+      </div>
+      <div class="hero-image">
+        <img src="標題情報画面.png" alt="BoringXMLEditor の画面" loading="eager">
       </div>
     </div>
   </div>
