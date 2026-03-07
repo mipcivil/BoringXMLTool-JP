@@ -24,7 +24,7 @@
       --green: #16a34a;
       --green-light: #dcfce7;
       --blue-light: #eff6ff;
-      --section-gap: 80px;
+      --section-gap: 64px;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -71,57 +71,52 @@
 
     /* ========== Hero ========== */
     .hero {
-      background: linear-gradient(160deg, #1e3a5f 0%, #2563eb 100%);
-      color: #fff;
-      padding: 72px 32px 80px;
+      background: #fff;
+      color: var(--text);
+      padding: 56px 32px 48px;
+      border-bottom: 1px solid var(--border);
     }
     .hero .container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
-    }
-    .hero-text {}
-    .hero-badges { display: flex; gap: 8px; margin-bottom: 20px; }
-    .badge {
-      display: inline-block;
-      padding: 4px 14px;
-      border-radius: 20px;
-      font-size: 0.78rem;
-      font-weight: 500;
-    }
-    .badge-platform { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); }
-    .badge-beta { background: rgba(250,204,21,0.25); color: #fde68a; }
-    .hero h1 {
-      font-size: 1.7rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      letter-spacing: 0.02em;
-    }
-    .hero-subtitle {
-      font-size: 1.05rem;
-      opacity: 0.85;
-      margin-bottom: 8px;
-    }
-    .hero-desc {
-      font-size: 0.92rem;
-      opacity: 0.7;
-      margin-bottom: 32px;
-      line-height: 1.8;
-    }
-    .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
-    .hero-image {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 12px;
-      padding: 8px;
+      max-width: 720px;
       text-align: center;
     }
-    .hero-image img {
-      width: 100%;
-      border-radius: 8px;
-      display: block;
+    .hero-badges { display: flex; gap: 8px; margin-bottom: 16px; justify-content: center; }
+    .badge {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
     }
+    .badge-platform { background: var(--blue-light); color: var(--primary); }
+    .badge-beta { background: #fef3c7; color: #92400e; }
+    .hero h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 0.01em;
+      color: var(--text);
+    }
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .hero-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      line-height: 1.8;
+    }
+    .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .hero-image { display: none; }
+    .hero-version {
+      margin-top: 20px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .hero-version a { color: var(--primary); text-decoration: none; }
+    .hero-version a:hover { text-decoration: underline; }
 
     /* ========== Buttons ========== */
     .btn {
@@ -135,10 +130,10 @@
       border: none;
       cursor: pointer;
     }
-    .btn-primary { background: #fff; color: var(--primary); }
-    .btn-primary:hover { background: #f1f5f9; transform: translateY(-1px); }
-    .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.4); }
-    .btn-outline:hover { border-color: #fff; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
     .btn-green { background: var(--green); color: #fff; }
     .btn-green:hover { background: #15803d; }
     .btn-blue { background: var(--primary-light); color: #fff; }
@@ -255,32 +250,20 @@
     .feature-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 28px;
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-    .feature-card:hover {
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-      transform: translateY(-2px);
+      border-radius: 8px;
+      padding: 24px;
     }
     .feature-icon {
-      width: 44px;
-      height: 44px;
-      background: var(--blue-light);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      margin-bottom: 16px;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
     }
     .feature-card h3 {
-      font-size: 1rem;
-      margin-bottom: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
       font-weight: 700;
     }
     .feature-card p {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       line-height: 1.7;
     }
@@ -302,8 +285,7 @@
       transition: transform 0.2s, box-shadow 0.2s;
     }
     .screenshot-item:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
     .screenshot-item img {
       width: 100%;
@@ -426,7 +408,7 @@
       text-align: center;
       transition: box-shadow 0.2s;
     }
-    .pricing-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+    .pricing-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
     .pricing-card.free { border-color: var(--green); }
     .pricing-card.featured {
       border-color: var(--primary-light);
@@ -692,13 +674,8 @@
 
     /* ========== Responsive ========== */
     @media (max-width: 960px) {
-      .hero .container { grid-template-columns: 1fr; }
-      .hero-image { display: none; }
-      .hero { text-align: center; padding: 60px 24px 64px; }
-      .hero-buttons { justify-content: center; }
-      .hero-badges { justify-content: center; }
+      .hero { padding: 48px 24px 40px; }
       .steps-grid { grid-template-columns: 1fr 1fr; }
-      .specs-bar .container { flex-wrap: wrap; gap: 24px; }
     }
     @media (max-width: 768px) {
       .container { padding: 0 20px; }
@@ -706,8 +683,8 @@
       .pricing-grid { grid-template-columns: 1fr; max-width: 360px; }
       .pain-grid { grid-template-columns: 1fr; }
       .steps-grid { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 1.4rem; }
-      section { padding: 64px 0; }
+      .hero h1 { font-size: 1.3rem; }
+      section { padding: 48px 0; }
       .screenshot-gallery { grid-template-columns: 1fr; max-width: 480px; }
       nav .nav-links { gap: 14px; }
       nav .nav-links a { font-size: 0.8rem; }
@@ -745,42 +722,8 @@
           <a class="btn btn-primary" href="https://github.com/mipcivil/BoringXMLTool-JP/releases/latest" target="_blank" rel="noopener">無料でダウンロード</a>
           <a class="btn btn-outline" href="#features">機能を見る</a>
         </div>
-      </div>
-      <div class="hero-image">
-        <img src="標題情報画面.png" alt="BoringXMLEditor - 標題情報編集画面と地図表示">
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== Specs Bar ===== -->
-  <div class="specs-bar">
-    <div class="container">
-      <div class="spec-item">
-        <div class="spec-icon">📋</div>
-        <div>
-          <div style="font-weight: 700; font-size: 0.88rem;">国交省・農水省規格</div>
-          <div style="font-size: 0.78rem; opacity: 0.7;">電子納品要領 準拠</div>
-        </div>
-      </div>
-      <div class="spec-item">
-        <div class="spec-icon">📐</div>
-        <div>
-          <div style="font-weight: 700; font-size: 0.88rem;">DTD 2.10 / 3.00 / 4.00</div>
-          <div style="font-size: 0.78rem; opacity: 0.7;">バージョン自動判定</div>
-        </div>
-      </div>
-      <div class="spec-item">
-        <div class="spec-icon">📄</div>
-        <div>
-          <div style="font-weight: 700; font-size: 0.88rem;">PDF / DXF出力</div>
-          <div style="font-size: 0.78rem; opacity: 0.7;">柱状図をワンクリック出力</div>
-        </div>
-      </div>
-      <div class="spec-item">
-        <div class="spec-icon">💻</div>
-        <div>
-          <div style="font-weight: 700; font-size: 0.88rem;">インストール不要</div>
-          <div style="font-size: 0.78rem; opacity: 0.7;">ZIP展開ですぐ使える</div>
+        <div class="hero-version">
+          v1.0.0-beta.5 — <a href="https://github.com/mipcivil/BoringXMLTool-JP/releases" target="_blank" rel="noopener">更新履歴</a>
         </div>
       </div>
     </div>
@@ -797,23 +740,23 @@
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">🔍</div>
-          <h3>納品前チェックで止まる原因を入力中に検出</h3>
-          <p>必須項目の抜け・深度区間の矛盾・コード誤りを入力中にリアルタイムで警告。手戻りを未然に防ぎます。</p>
+          <h3>入力中にリアルタイムでチェック</h3>
+          <p>必須項目の抜け・深度区間の矛盾・コード誤りを入力中に警告します。納品前の手戻りを減らせます。</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">📐</div>
-          <h3>DTD差分を意識せず編集・出力</h3>
-          <p>DTD 2.10 / 3.00 / 4.00 を自動判定し、バージョンごとの必須項目を自動で担保。対応表を見る作業がなくなります。</p>
+          <h3>DTDバージョンを自動判定</h3>
+          <p>DTD 2.10 / 3.00 / 4.00 を自動で判定し、バージョンごとの違いを吸収します。対応表を見る必要がなくなります。</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">📊</div>
           <h3>柱状図プレビューとPDF・DXF出力</h3>
-          <p>編集中のデータから柱状図をリアルタイムでプレビュー。PDF・DXF形式でそのまま出力でき、別ソフトが不要です。</p>
+          <p>編集中のデータから柱状図をリアルタイムでプレビューできます。PDF・DXF形式でそのまま出力できます。</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">📦</div>
-          <h3>ZIPを展開するだけで即使える</h3>
-          <p>インストール不要、環境設定不要。ZIPを展開してすぐに起動できます。無料版でもXML編集・プレビュー・PDF出力が使えます。</p>
+          <h3>インストール不要</h3>
+          <p>ZIPを展開するだけで起動できます。無料版でもXML編集・プレビュー・PDF出力が使えます。</p>
         </div>
       </div>
     </div>
