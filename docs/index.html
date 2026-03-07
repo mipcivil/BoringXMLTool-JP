@@ -71,14 +71,24 @@
 
     /* ========== Hero ========== */
     .hero {
-      background: #fff;
+      background: url('標題情報画面.png') center center / cover no-repeat;
       color: var(--text);
       padding: 56px 32px 48px;
       border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(6px);
     }
     .hero .container {
       max-width: 720px;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
     .hero-badges { display: flex; gap: 8px; margin-bottom: 16px; justify-content: center; }
     .badge {
@@ -88,8 +98,8 @@
       font-size: 0.75rem;
       font-weight: 500;
     }
-    .badge-platform { background: var(--blue-light); color: var(--primary); }
-    .badge-beta { background: #fef3c7; color: #92400e; }
+    .badge-platform { background: rgba(239,246,255,0.9); color: var(--primary); }
+    .badge-beta { background: rgba(254,243,199,0.9); color: #92400e; }
     .hero h1 {
       font-size: 1.5rem;
       font-weight: 700;
