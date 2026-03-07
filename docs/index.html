@@ -7,24 +7,24 @@
   <title>BoringXMLEditor - ボーリングXML編集ツール</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #1a4b8c;
-      --primary-light: #2563eb;
-      --primary-dark: #0f2f5a;
-      --accent: #b7950b;
-      --accent-light: #d4a912;
-      --bg: #f8fafc;
-      --bg-alt: #f0f4f8;
+      --primary: #2563eb;
+      --primary-light: #3b82f6;
+      --primary-dark: #1e3a5f;
+      --accent: #e67e22;
+      --accent-light: #f39c12;
+      --bg: #ffffff;
+      --bg-alt: #f7f9fc;
       --card-bg: #ffffff;
       --text: #1e293b;
-      --text-muted: #5a6577;
-      --border: #dde3ea;
-      --green: #16803c;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --green: #16a34a;
       --green-light: #dcfce7;
-      --blue-light: #dbeafe;
-      --section-gap: 96px;
+      --blue-light: #eff6ff;
+      --section-gap: 80px;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -39,21 +39,22 @@
 
     /* ========== Navigation ========== */
     nav {
-      background: var(--primary-dark);
+      background: #fff;
       padding: 0 32px;
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
     nav .container {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 56px;
+      height: 52px;
     }
     nav .logo {
-      color: #fff;
+      color: var(--primary);
       font-weight: 700;
       font-size: 1.05rem;
       text-decoration: none;
@@ -61,18 +62,18 @@
     }
     nav .nav-links { display: flex; gap: 28px; }
     nav .nav-links a {
-      color: #94a3b8;
+      color: var(--text-muted);
       text-decoration: none;
       font-size: 0.88rem;
       transition: color 0.2s;
     }
-    nav .nav-links a:hover { color: #fff; }
+    nav .nav-links a:hover { color: var(--primary); }
 
     /* ========== Hero ========== */
     .hero {
-      background: linear-gradient(160deg, #0f2f5a 0%, #1a4b8c 50%, #2563eb 100%);
+      background: linear-gradient(160deg, #1e3a5f 0%, #2563eb 100%);
       color: #fff;
-      padding: 80px 32px 88px;
+      padding: 72px 32px 80px;
     }
     .hero .container {
       display: grid;
@@ -92,8 +93,7 @@
     .badge-platform { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); }
     .badge-beta { background: rgba(250,204,21,0.25); color: #fde68a; }
     .hero h1 {
-      font-family: "Noto Serif JP", serif;
-      font-size: 1.75rem;
+      font-size: 1.7rem;
       font-weight: 700;
       margin-bottom: 12px;
       letter-spacing: 0.02em;
@@ -140,15 +140,15 @@
     .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.4); }
     .btn-outline:hover { border-color: #fff; }
     .btn-green { background: var(--green); color: #fff; }
-    .btn-green:hover { background: #15703a; }
+    .btn-green:hover { background: #15803d; }
     .btn-blue { background: var(--primary-light); color: #fff; }
     .btn-blue:hover { background: var(--primary); }
 
     /* ========== Specs Bar ========== */
     .specs-bar {
-      background: var(--primary-dark);
+      background: #1e3a5f;
       border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 20px 32px;
+      padding: 18px 32px;
     }
     .specs-bar .container {
       display: flex;
@@ -180,8 +180,7 @@
       margin-bottom: 48px;
     }
     .section-header h2 {
-      font-family: "Noto Serif JP", serif;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 700;
       margin-bottom: 8px;
       color: var(--text);
@@ -443,7 +442,7 @@
       font-weight: 700;
       color: var(--primary);
     }
-    .pricing-card.free .price { color: var(--green); }
+    .pricing-card.free .price { color: var(--green); font-size: 1.8rem; }
     .pricing-card .price-sub {
       font-size: 0.82rem;
       color: var(--text-muted);
@@ -683,11 +682,12 @@
 
     /* ========== Footer ========== */
     footer {
-      background: var(--primary-dark);
-      color: #94a3b8;
+      background: #f8fafc;
+      color: var(--text-muted);
       text-align: center;
       padding: 28px;
       font-size: 0.82rem;
+      border-top: 1px solid var(--border);
     }
 
     /* ========== Responsive ========== */
@@ -786,53 +786,13 @@
     </div>
   </div>
 
-  <!-- ===== Pain Points ===== -->
-  <section class="pain-section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">課題</div>
-        <h2>こんな場面で時間がかかっていませんか</h2>
-      </div>
-      <div class="pain-grid">
-        <div class="pain-item">
-          <div class="pain-icon">⚠️</div>
-          <div>
-            <h4>必須項目の抜け</h4>
-            <p>空欄があると納品前のチェックで止まる。どこが未入力か探すのに時間を取られる。</p>
-          </div>
-        </div>
-        <div class="pain-item">
-          <div class="pain-icon">🔄</div>
-          <div>
-            <h4>DTDバージョンごとに確認が必要</h4>
-            <p>2.10と4.00で構造が違い、対応表を見ながらの作業が発生する。</p>
-          </div>
-        </div>
-        <div class="pain-item">
-          <div class="pain-icon">🖨️</div>
-          <div>
-            <h4>柱状図作成に別ソフトが必要</h4>
-            <p>XML編集と柱状図出力で別々のソフトを使い分けている。</p>
-          </div>
-        </div>
-        <div class="pain-item">
-          <div class="pain-icon">📦</div>
-          <div>
-            <h4>導入・セットアップに手間がかかる</h4>
-            <p>インストーラー実行、ライセンス認証、環境設定。使い始めるまでが長い。</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ===== Features ===== -->
   <section id="features">
     <div class="container">
       <div class="section-header">
         <div class="section-label">機能</div>
-        <h2>BoringXMLEditorでの対応</h2>
-        <p>上記の課題に対して、以下の機能で対応しています。</p>
+        <h2>主な機能</h2>
       </div>
       <div class="features-grid">
         <div class="feature-card">
