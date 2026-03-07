@@ -700,9 +700,7 @@
       <div class="nav-links">
         <a href="#features">機能</a>
         <a href="#download">ダウンロード</a>
-        <a href="#pricing">料金</a>
-        <a href="#faq">FAQ</a>
-        <a href="#terms">規約</a>
+        <a href="https://github.com/mipcivil/BoringXMLTool-JP" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
   </nav>
@@ -734,7 +732,7 @@
   <section id="features">
     <div class="container">
       <div class="section-header">
-        <div class="section-label">機能</div>
+
         <h2>主な機能</h2>
       </div>
       <div class="features-grid">
@@ -766,7 +764,7 @@
   <section class="screenshot-section">
     <div class="container">
       <div class="section-header">
-        <div class="section-label">画面イメージ</div>
+
         <h2>操作画面</h2>
       </div>
       <div class="screenshot-gallery">
@@ -793,17 +791,15 @@
   <section id="download">
     <div class="container">
       <div class="section-header">
-        <div class="section-label">ダウンロード</div>
-        <h2>まずは無料版でお試しください</h2>
-        <p>XML編集・プレビュー・PDF出力は無料版で利用できます。</p>
+        <h2>ダウンロード</h2>
       </div>
       <div class="download-card">
         <h3>BoringXMLEditor for Windows <span style="font-size: 0.72rem; background: #fef3c7; color: #92400e; padding: 2px 8px; border-radius: 4px; vertical-align: middle;">Beta</span></h3>
-        <p class="download-info">インストール不要。ZIPを展開してすぐに使えます。</p>
+        <p class="download-info">ZIPを展開して <code>BoringXMLEditor.exe</code> を起動するだけで使えます。</p>
         <a class="btn btn-green" href="https://github.com/mipcivil/BoringXMLTool-JP/releases/latest" target="_blank" rel="noopener">最新版をダウンロード</a>
         <div class="download-meta">
           <span>Windows 10/11 (64-bit)</span>
-          <span>ZIP配布（インストーラー不要）</span>
+          <span>ZIP配布</span>
         </div>
       </div>
       <p style="text-align: center; margin-top: 16px; font-size: 0.85rem; color: var(--text-muted);">
@@ -812,103 +808,47 @@
     </div>
   </section>
 
-  <!-- ===== How It Works ===== -->
-  <section class="howto-section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">ご利用の流れ</div>
-        <h2>4ステップで利用開始</h2>
-      </div>
-      <div class="steps-grid">
-        <div class="step">
-          <div class="step-number">1</div>
-          <h3>ダウンロード <span class="free-label">無料</span></h3>
-          <p>ZIPファイルを取得し、任意のフォルダに展開します。</p>
-        </div>
-        <div class="step">
-          <div class="step-number">2</div>
-          <h3>ソフト起動 <span class="free-label">無料</span></h3>
-          <p><code>BoringXMLEditor.exe</code> を起動。無料版としてすぐに使えます。</p>
-        </div>
-        <div class="step">
-          <div class="step-number">3</div>
-          <h3>有料版の検討 <span class="paid-label">有料</span></h3>
-          <p>DXFエクスポートや.BGEO対応が必要な場合は有料版をご検討ください。</p>
-        </div>
-        <div class="step">
-          <div class="step-number">4</div>
-          <h3>ライセンス適用</h3>
-          <p>メールで届くライセンスキーをアプリ内で入力すると、有料機能が有効になります。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ===== Pricing ===== -->
   <section id="pricing">
     <div class="container">
       <div class="section-header">
-        <div class="section-label">料金</div>
-        <h2>無料版と有料版の違い</h2>
-        <p>基本的な編集・プレビュー・PDF出力は無料版に含まれています。</p>
+        <h2>無料版と有料版</h2>
       </div>
-      <div class="pricing-grid">
+      <div class="pricing-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 680px;">
         <div class="pricing-card free">
           <div class="plan-name">無料版</div>
-          <div class="price">&yen;0</div>
+          <div class="price" style="font-size: 1.8rem;">&yen;0</div>
           <div class="period">ずっと無料</div>
           <ul>
             <li class="yes">XML読み込み・編集・保存</li>
-            <li class="yes">複数DTDバージョン対応</li>
-            <li class="yes">ボーリング柱状図プレビュー</li>
+            <li class="yes">DTD 2.10 / 3.00 / 4.00</li>
+            <li class="yes">柱状図プレビュー</li>
             <li class="yes">PDFエクスポート</li>
             <li class="no">DXFエクスポート</li>
-            <li class="no">.BGEO ファイル読み書き</li>
+            <li class="no">.BGEO 読み書き</li>
           </ul>
-          <a class="btn btn-green" href="https://github.com/mipcivil/BoringXMLTool-JP/releases/latest" target="_blank" rel="noopener" style="width: 100%; text-align: center; padding: 10px 16px; font-size: 0.9rem;">ダウンロード</a>
+          <a class="btn btn-green" href="https://github.com/mipcivil/BoringXMLTool-JP/releases/latest" target="_blank" rel="noopener" style="width: 100%; text-align: center; padding: 10px 16px; font-size: 0.88rem;">ダウンロード</a>
         </div>
         <div class="pricing-card featured">
-          <div class="plan-name">月額プラン</div>
+          <div class="plan-name">有料版</div>
           <div class="price">&yen;2,000</div>
-          <div class="price-sub">1日あたり約66円</div>
-          <div class="period">/ 月（税込）</div>
+          <div class="period">/ 月（税込）　or　&yen;24,000 / 年</div>
           <ul>
-            <li class="yes">XML読み込み・編集・保存</li>
-            <li class="yes">複数DTDバージョン対応</li>
-            <li class="yes">ボーリング柱状図プレビュー</li>
-            <li class="yes">PDF・DXFエクスポート</li>
+            <li class="yes">無料版のすべての機能</li>
+            <li class="yes">DXFエクスポート</li>
             <li class="yes">.BGEO ファイル読み書き</li>
           </ul>
           <p style="font-size: 0.78rem; color: var(--text-muted);">
-            月単位の自動更新・いつでもキャンセル可
+            いつでもキャンセル可。アプリ内からも購入できます。
           </p>
-          <button class="btn btn-blue" style="width: 100%; margin-top: 12px; padding: 10px 16px; font-size: 0.9rem;" onclick="openPurchase('monthly')">有料版を購入する</button>
+          <button class="btn btn-blue" style="width: 100%; margin-top: 12px; padding: 10px 16px; font-size: 0.88rem;" onclick="openPurchase('monthly')">月額で購入</button>
+          <button class="btn-quote-link" onclick="openPurchase('yearly')">年額で購入</button>
           <button class="btn-quote-link" onclick="openQuote('monthly')">見積書をダウンロード &rarr;</button>
         </div>
-        <div class="pricing-card">
-          <div class="plan-name">年額プラン</div>
-          <div class="price">&yen;24,000</div>
-          <div class="price-sub">月換算 &yen;2,000</div>
-          <div class="period">/ 年（税込）</div>
-          <ul>
-            <li class="yes">XML読み込み・編集・保存</li>
-            <li class="yes">複数DTDバージョン対応</li>
-            <li class="yes">ボーリング柱状図プレビュー</li>
-            <li class="yes">PDF・DXFエクスポート</li>
-            <li class="yes">.BGEO ファイル読み書き</li>
-          </ul>
-          <p style="font-size: 0.78rem; color: var(--text-muted);">
-            年単位の自動更新・いつでもキャンセル可
-          </p>
-          <button class="btn btn-blue" style="width: 100%; margin-top: 12px; padding: 10px 16px; font-size: 0.9rem;" onclick="openPurchase('yearly')">有料版を購入する</button>
-          <button class="btn-quote-link" onclick="openQuote('yearly')">見積書をダウンロード &rarr;</button>
-        </div>
       </div>
-      <div class="pricing-note">
-        まずは無料版をダウンロードしてお試しください。有料版はアプリ内からも購入できます。<br>
-        <span style="font-size: 0.82rem;">法人のお客様は見積書をPDFで即時発行できます。銀行振込にも対応しています。</span><br>
-        <span style="font-size: 0.82rem;">※ 現在ベータ版として公開中です。正式リリース時に価格が変更される場合があります。</span>
-      </div>
+      <p style="text-align: center; margin-top: 20px; font-size: 0.82rem; color: var(--text-muted);">
+        ※ ベータ版のため、正式リリース時に価格が変更される場合があります。
+      </p>
     </div>
   </section>
 
@@ -916,55 +856,14 @@
   <section id="faq" class="faq-section">
     <div class="container">
       <div class="section-header">
-        <div class="section-label">FAQ</div>
         <h2>よくある質問</h2>
       </div>
-      <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            無料版で電子納品用のPDFは出力できますか？
-            <span class="faq-arrow">▼</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">はい、無料版でボーリング柱状図のPDFエクスポートが利用できます。DXF形式での出力には有料版が必要です。</div>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            既存のXMLファイルはそのまま読み込めますか？
-            <span class="faq-arrow">▼</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">はい、DTD 2.10 / 3.00 / 4.00 に準拠したXMLファイルをそのまま読み込めます。DTDバージョンは自動で判定されます。</div>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            インストールは必要ですか？
-            <span class="faq-arrow">▼</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">不要です。ZIPファイルを展開するだけで使用できます。インストーラーやレジストリへの書き込みはありません。</div>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            有料版のライセンスはPC何台まで使えますか？
-            <span class="faq-arrow">▼</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">ライセンスは1台のマシンに紐づきます。別のPCで使用する場合は、ライセンスの移行が必要です。</div>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            サブスクリプションはいつでも解約できますか？
-            <span class="faq-arrow">▼</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">はい、いつでもキャンセル可能です。キャンセル後も、現在の請求期間の終了まで有料版機能をご利用いただけます。</div>
-          </div>
-        </div>
+      <div class="terms" style="max-width: 680px;">
+        <p><strong>Q. 無料版でPDFは出力できますか？</strong><br>はい。柱状図のPDF出力は無料版で使えます。DXF出力は有料版です。</p>
+        <p style="margin-top: 16px;"><strong>Q. 既存のXMLファイルは読み込めますか？</strong><br>DTD 2.10 / 3.00 / 4.00 に準拠したXMLをそのまま読み込めます。</p>
+        <p style="margin-top: 16px;"><strong>Q. インストールは必要ですか？</strong><br>不要です。ZIPを展開するだけで使えます。レジストリへの書き込みもありません。</p>
+        <p style="margin-top: 16px;"><strong>Q. ライセンスはPC何台まで？</strong><br>1台に紐づきます。別のPCで使う場合はライセンスの移行が必要です。</p>
+        <p style="margin-top: 16px;"><strong>Q. サブスクリプションは解約できますか？</strong><br>いつでもキャンセルできます。現在の請求期間の終了まで使えます。</p>
       </div>
     </div>
   </section>
@@ -973,7 +872,7 @@
   <section id="terms">
     <div class="container">
       <div class="section-header">
-        <div class="section-label">規約</div>
+
         <h2>利用規約・返金ポリシー</h2>
       </div>
       <div class="terms">
@@ -1033,23 +932,6 @@
     </div>
   </div>
 
-  <!-- ===== Contact ===== -->
-  <section class="contact-section">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">お問い合わせ</div>
-        <h2>ご質問・不具合報告</h2>
-      </div>
-      <div class="contact-info">
-        <p>ご質問・不具合報告・返金のご相談は<br>GitHub Issues よりお願いいたします。</p>
-        <div class="contact-links">
-          <a href="https://github.com/mipcivil/BoringXMLTool-JP/issues" target="_blank" rel="noopener">GitHub Issues &rarr;</a>
-          <a href="https://github.com/mipcivil/BoringXMLTool-JP" target="_blank" rel="noopener">リポジトリ &rarr;</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ===== Purchase Modal ===== -->
   <div class="modal-overlay" id="purchaseModal">
     <div class="modal">
@@ -1084,8 +966,11 @@
 
   <!-- ===== Footer ===== -->
   <footer>
-    <p><a href="#" onclick="openTokushoho(); return false;" style="color: var(--text-muted); text-decoration: underline;">特定商取引法に基づく表記</a></p>
-    <p>&copy; 2026 StrataWorks. All rights reserved.</p>
+    <p>
+      BoringXMLEditor &mdash;
+      <a href="https://github.com/mipcivil/BoringXMLTool-JP/issues" target="_blank" rel="noopener" style="color: var(--text-muted);">不具合報告・質問</a> |
+      <a href="#" onclick="openTokushoho(); return false;" style="color: var(--text-muted);">特定商取引法に基づく表記</a>
+    </p>
   </footer>
 
   <script>
