@@ -1105,18 +1105,15 @@
           <li>本ソフトウェアの使用により生じた損害について、StrataWorks は一切の責任を負いません。</li>
         </ul>
 
-        <p style="margin-top: 20px; text-align: center;"><a href="#tokushoho" style="color: var(--primary-light); font-size: 0.88rem;">特定商取引法に基づく表示 &darr;</a></p>
       </div>
     </div>
   </section>
 
-  <!-- ===== 特定商取引法に基づく表示 ===== -->
-  <section id="tokushoho" style="background: var(--bg-alt);">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">法的表示</div>
-        <h2>特定商取引法に基づく表示</h2>
-      </div>
+  <!-- ===== 特定商取引法モーダル ===== -->
+  <div class="modal-overlay" id="tokushohoModal">
+    <div class="modal" style="max-width: 600px;">
+      <button class="modal-close" onclick="closeTokushoho()">&times;</button>
+      <h3>特定商取引法に基づく表記</h3>
       <table class="tokushoho-table">
         <tr><th>販売事業者</th><td>葉　嘉瑤</td></tr>
         <tr><th>所在地</th><td>請求があれば遅滞なく開示いたします</td></tr>
@@ -1131,7 +1128,7 @@
         <tr><th>動作環境</th><td>Windows 10 / 11（64bit）</td></tr>
       </table>
     </div>
-  </section>
+  </div>
 
   <!-- ===== Contact ===== -->
   <section class="contact-section">
@@ -1184,6 +1181,7 @@
 
   <!-- ===== Footer ===== -->
   <footer>
+    <p><a href="#" onclick="openTokushoho(); return false;" style="color: var(--text-muted); text-decoration: underline;">特定商取引法に基づく表記</a></p>
     <p>&copy; 2026 StrataWorks. All rights reserved.</p>
   </footer>
 
@@ -1219,6 +1217,16 @@
 
     document.getElementById("purchaseModal").addEventListener("click", function(e) {
       if (e.target === this) closePurchase();
+    });
+
+    function openTokushoho() {
+      document.getElementById("tokushohoModal").classList.add("active");
+    }
+    function closeTokushoho() {
+      document.getElementById("tokushohoModal").classList.remove("active");
+    }
+    document.getElementById("tokushohoModal").addEventListener("click", function(e) {
+      if (e.target === this) closeTokushoho();
     });
 
     function submitPurchase() {
