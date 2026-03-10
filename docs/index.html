@@ -947,7 +947,7 @@
         <p><strong>Q. 無料版でPDFは出力できますか？</strong><br>はい。柱状図のPDF出力は無料版で使えます。DXF出力は有料版です。</p>
         <p style="margin-top: 16px;"><strong>Q. 既存のXMLファイルは読み込めますか？</strong><br>DTD 2.10 / 3.00 / 4.00 に準拠したXMLをそのまま読み込めます。</p>
         <p style="margin-top: 16px;"><strong>Q. インストールは必要ですか？</strong><br>不要です。ZIPを展開するだけで使えます。レジストリへの書き込みもありません。</p>
-        <p style="margin-top: 16px;"><strong>Q. ライセンスはPC何台まで？</strong><br>1台に紐づきます。別のPCで使う場合はライセンスの移行が必要です。</p>
+        <p style="margin-top: 16px;"><strong>Q. ライセンスはPC何台まで？</strong><br>1台に紐づきます。別のPCで使う場合は、新しいPCでライセンスキーを入力するだけで自動的に移行されます。旧PCのライセンスは無効になります。</p>
         <p style="margin-top: 16px;"><strong>Q. サブスクリプションは解約できますか？</strong><br>いつでもキャンセルできます。<a href="#manage" style="color: var(--primary-light);">サブスクリプション管理</a>からお手続きください。現在の請求期間の終了まで使えます。</p>
       </div>
     </div>
@@ -1063,6 +1063,8 @@
       <input type="email" id="bankOrderEmail" placeholder="your@email.com" autocomplete="email">
       <label for="bankOrderPhone">電話番号（任意）</label>
       <input type="tel" id="bankOrderPhone" placeholder="03-1234-5678">
+      <label for="bankOrderQuoteNo">見積書番号（任意）</label>
+      <input type="text" id="bankOrderQuoteNo" placeholder="Q-20260311-0001">
       <div style="display: flex; gap: 12px; align-items: end;">
         <div style="flex: 1;">
           <label for="bankOrderPlan">プラン <span style="color: #dc2626;">*</span></label>
@@ -1077,6 +1079,7 @@
         </div>
       </div>
       <div id="bankOrderTotal" style="text-align: right; font-size: 1.1rem; font-weight: 700; color: var(--primary); margin: 12px 0;">合計: ¥2,000</div>
+      <div id="bankOrderTurnstile" style="margin: 12px 0;"></div>
       <button class="btn-submit" id="bankOrderSubmit" onclick="submitBankOrder()">発注する</button>
       <p class="note">発注後、振込先情報をメールでお送りします。<br>入金確認後、ライセンスキーをメールで発行します。</p>
     </div>
@@ -1233,6 +1236,9 @@
 
     // ── 銀行振込発注モーダル ──
     var bankOrderPlan = "monthly";
+    var turnstileSiteKey = "0x4AAAAAABB_placeholder"; // Cloudflare Turnstile サイトキー（要設定）
+    var turnstileWidgetId = null;
+    var turnstileToken = null;
 
     function openBankOrder(plan) {
       bankOrderPlan = plan;
@@ -1242,11 +1248,23 @@
       document.getElementById("bankOrderPerson").value = "";
       document.getElementById("bankOrderEmail").value = "";
       document.getElementById("bankOrderPhone").value = "";
+      document.getElementById("bankOrderQuoteNo").value = "";
       document.getElementById("bankOrderQuantity").value = "1";
       document.getElementById("bankOrderSubmit").disabled = false;
       document.getElementById("bankOrderSubmit").textContent = "発注する";
+      turnstileToken = null;
       updateBankOrderTotal();
       document.getElementById("bankOrderModal").classList.add("active");
+      // Turnstile ウィジェットをレンダリング
+      var container = document.getElementById("bankOrderTurnstile");
+      container.innerHTML = "";
+      if (typeof turnstile !== "undefined" && turnstileSiteKey.indexOf("placeholder") === -1) {
+        turnstileWidgetId = turnstile.render(container, {
+          sitekey: turnstileSiteKey,
+          theme: "light",
+          callback: function(token) { turnstileToken = token; }
+        });
+      }
     }
 
     function closeBankOrder() {
@@ -1277,6 +1295,7 @@
       var person = document.getElementById("bankOrderPerson").value.trim();
       var email = document.getElementById("bankOrderEmail").value.trim();
       var phone = document.getElementById("bankOrderPhone").value.trim();
+      var quoteNo = document.getElementById("bankOrderQuoteNo").value.trim();
       var plan = document.getElementById("bankOrderPlan").value;
       var quantity = parseInt(document.getElementById("bankOrderQuantity").value) || 1;
       var errorEl = document.getElementById("bankOrderError");
@@ -1311,7 +1330,9 @@
           email: email,
           phone: phone || undefined,
           plan: plan,
-          quantity: quantity
+          quantity: quantity,
+          quote_number: quoteNo || undefined,
+          turnstile_token: turnstileToken || undefined
         })
       })
       .then(function(res) { return res.json().then(function(d) { return { ok: res.ok, data: d }; }); })
@@ -1341,6 +1362,7 @@
     }
   </script>
 
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
     var quotePlan = "monthly";
