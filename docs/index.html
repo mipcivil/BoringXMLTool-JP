@@ -928,7 +928,8 @@
         <h2>サブスクリプション管理</h2>
       </div>
       <div class="manage-sub">
-        <p>購入時のメールアドレスを入力してください。<br>Stripe のポータルで、プラン変更・キャンセル・支払い方法の更新ができます。</p>
+        <p>クレジットカード決済でご購入の方は、購入時のメールアドレスを入力してください。<br>Stripe のポータルで、プラン変更・キャンセル・支払い方法の更新ができます。</p>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0;">※ 銀行振込でご購入の方は <a href="mailto:info@strataworks.dev" style="color: var(--primary-light);">info@strataworks.dev</a> までご連絡ください。</p>
         <input type="email" id="manageEmail" placeholder="your@email.com" autocomplete="email">
         <div class="manage-error" id="manageError"></div>
         <button class="btn-manage" id="manageBtn" onclick="openPortal()">管理画面を開く</button>
