@@ -590,6 +590,49 @@
       margin-top: 16px;
     }
 
+    /* ========== Manage Subscription ========== */
+    .manage-sub {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 32px;
+      max-width: 480px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .manage-sub p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px; }
+    .manage-sub input[type="email"] {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      background: var(--bg);
+      color: var(--text);
+      box-sizing: border-box;
+    }
+    .manage-sub input[type="email"]:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+    }
+    .manage-sub .btn-manage {
+      margin-top: 12px;
+      padding: 10px 28px;
+      background: var(--text);
+      color: var(--card-bg);
+      border: none;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .manage-sub .btn-manage:hover { opacity: 0.85; }
+    .manage-sub .btn-manage:disabled { opacity: 0.5; cursor: not-allowed; }
+    .manage-sub .manage-error { color: #e74c3c; font-size: 0.85rem; margin-top: 8px; }
+    .manage-sub .manage-note { font-size: 0.8rem; color: var(--text-muted); margin-top: 12px; }
+
     /* ========== Purchase Modal ========== */
     .modal-overlay {
       display: none;
@@ -877,6 +920,22 @@
     </div>
   </section>
 
+  <!-- ===== Manage Subscription ===== -->
+  <section id="manage" style="padding: 48px 0;">
+    <div class="container">
+      <div class="section-header">
+        <h2>サブスクリプション管理</h2>
+      </div>
+      <div class="manage-sub">
+        <p>購入時のメールアドレスを入力してください。<br>Stripe のポータルで、プラン変更・キャンセル・支払い方法の更新ができます。</p>
+        <input type="email" id="manageEmail" placeholder="your@email.com" autocomplete="email">
+        <div class="manage-error" id="manageError"></div>
+        <button class="btn-manage" id="manageBtn" onclick="openPortal()">管理画面を開く</button>
+        <p class="manage-note">Stripe の安全なポータルにリダイレクトされます。</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== FAQ ===== -->
   <section id="faq" class="faq-section">
     <div class="container">
@@ -888,7 +947,7 @@
         <p style="margin-top: 16px;"><strong>Q. 既存のXMLファイルは読み込めますか？</strong><br>DTD 2.10 / 3.00 / 4.00 に準拠したXMLをそのまま読み込めます。</p>
         <p style="margin-top: 16px;"><strong>Q. インストールは必要ですか？</strong><br>不要です。ZIPを展開するだけで使えます。レジストリへの書き込みもありません。</p>
         <p style="margin-top: 16px;"><strong>Q. ライセンスはPC何台まで？</strong><br>1台に紐づきます。別のPCで使う場合はライセンスの移行が必要です。</p>
-        <p style="margin-top: 16px;"><strong>Q. サブスクリプションは解約できますか？</strong><br>いつでもキャンセルできます。現在の請求期間の終了まで使えます。</p>
+        <p style="margin-top: 16px;"><strong>Q. サブスクリプションは解約できますか？</strong><br>いつでもキャンセルできます。<a href="#manage" style="color: var(--primary-light);">サブスクリプション管理</a>からお手続きください。現在の請求期間の終了まで使えます。</p>
       </div>
     </div>
   </section>
@@ -1052,6 +1111,45 @@
     document.getElementById("tokushohoModal").addEventListener("click", function(e) {
       if (e.target === this) closeTokushoho();
     });
+
+    function openPortal() {
+      var email = document.getElementById("manageEmail").value.trim();
+      var errorEl = document.getElementById("manageError");
+      var btn = document.getElementById("manageBtn");
+      errorEl.textContent = "";
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errorEl.textContent = "有効なメールアドレスを入力してください。";
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "読み込み中...";
+
+      fetch(API_URL + "/api/portal", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email })
+      })
+      .then(function(res) {
+        if (!res.ok) {
+          return res.json().then(function(d) { throw new Error(d.error || "エラーが発生しました。"); });
+        }
+        return res.json();
+      })
+      .then(function(data) {
+        if (data.portal_url) {
+          window.location.href = data.portal_url;
+        }
+      })
+      .catch(function(err) {
+        errorEl.textContent = err.message || "サーバーに接続できません。";
+      })
+      .finally(function() {
+        btn.disabled = false;
+        btn.textContent = "管理画面を開く";
+      });
+    }
 
     function submitPurchase() {
       var email = document.getElementById("purchaseEmail").value.trim();
