@@ -1363,7 +1363,6 @@
   </script>
 
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
     var quotePlan = "monthly";
 
@@ -1457,34 +1456,25 @@
         validDate: formatDateJP(validDate)
       });
 
-      var container = document.createElement("div");
-      container.innerHTML = html;
-      container.style.position = "fixed";
-      container.style.left = "-9999px";
-      container.style.top = "0";
-      container.style.zIndex = "-1";
-      document.body.appendChild(container);
-
-      var opt = {
-        margin: 0,
-        filename: "\u898B\u7A4D\u66F8_" + quoteNo + ".pdf",
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, logging: false, onclone: function(doc) { return document.fonts.ready; } },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+      var printWin = window.open("", "_blank");
+      printWin.document.write(
+        "<!DOCTYPE html><html lang=\"ja\"><head>"
+        + "<meta charset=\"UTF-8\">"
+        + "<title>見積書_" + quoteNo + "</title>"
+        + "<link href=\"https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap\" rel=\"stylesheet\">"
+        + "<style>@media print { @page { size: A4; margin: 0; } body { margin: 0; } } body { margin: 0; }</style>"
+        + "</head><body>" + html + "</body></html>"
+      );
+      printWin.document.close();
+      printWin.onload = function() {
+        setTimeout(function() {
+          printWin.focus();
+          printWin.print();
+          submitBtn.disabled = false;
+          submitBtn.textContent = "見積書をPDFで発行";
+          closeQuote();
+        }, 800);
       };
-
-      html2pdf().set(opt).from(container.firstElementChild).save().then(function() {
-        document.body.removeChild(container);
-        submitBtn.disabled = false;
-        submitBtn.textContent = "\u898B\u7A4D\u66F8\u3092PDF\u3067\u767A\u884C";
-        closeQuote();
-      }).catch(function() {
-        document.body.removeChild(container);
-        errorEl.textContent = "PDF\u751F\u6210\u4E2D\u306B\u30A8\u30E9\u30FC\u304C\u767A\u751F\u3057\u307E\u3057\u305F\u3002";
-        errorEl.style.display = "block";
-        submitBtn.disabled = false;
-        submitBtn.textContent = "\u898B\u7A4D\u66F8\u3092PDF\u3067\u767A\u884C";
-      });
     }
 
     function buildEstimateHTML(d) {
