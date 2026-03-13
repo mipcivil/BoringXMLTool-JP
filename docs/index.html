@@ -1119,11 +1119,13 @@
     });
 
     var API_URL = "https://boringxml-license-api.miaipwork.workers.dev";
+    var PRICE_MONTHLY = 2000;
+    var PRICE_YEARLY = 24000;
     var selectedPlan = "monthly";
 
     function openPurchase(plan) {
       selectedPlan = plan;
-      var label = plan === "yearly" ? "年額プラン: ¥24,000 / 年（税込）" : "月額プラン: ¥2,000 / 月（税込）";
+      var label = plan === "yearly" ? "年額プラン: ¥" + PRICE_YEARLY.toLocaleString() + " / 年（税込）" : "月額プラン: ¥" + PRICE_MONTHLY.toLocaleString() + " / 月（税込）";
       document.getElementById("planSummary").innerHTML = "プラン: <strong>" + label + "</strong>";
       document.getElementById("purchaseError").style.display = "none";
       document.getElementById("purchaseEmail").value = "";
@@ -1278,11 +1280,11 @@
     function updateBankOrderTotal() {
       var plan = document.getElementById("bankOrderPlan").value;
       var qty = parseInt(document.getElementById("bankOrderQuantity").value) || 1;
-      var unitPrice = plan === "yearly" ? 24000 : 2000;
+      var unitPrice = plan === "yearly" ? PRICE_YEARLY : PRICE_MONTHLY;
       var total = unitPrice * qty;
       var label = plan === "yearly"
-        ? "年額プラン: ¥24,000 / 年（税込）"
-        : "月額プラン: ¥2,000 / 月（税込）";
+        ? "年額プラン: ¥" + PRICE_YEARLY.toLocaleString() + " / 年（税込）"
+        : "月額プラン: ¥" + PRICE_MONTHLY.toLocaleString() + " / 月（税込）";
       document.getElementById("bankOrderPlanSummary").innerHTML = "プラン: <strong>" + label + "</strong>";
       document.getElementById("bankOrderTotal").textContent = "合計: ¥" + total.toLocaleString();
     }
@@ -1380,8 +1382,8 @@
     function openQuote(plan) {
       quotePlan = plan;
       var label = plan === "yearly"
-        ? "年額プラン: &yen;24,000 / 年（税込）"
-        : "月額プラン: &yen;2,000 / 月（税込）";
+        ? "年額プラン: &yen;" + PRICE_YEARLY.toLocaleString() + " / 年（税込）"
+        : "月額プラン: &yen;" + PRICE_MONTHLY.toLocaleString() + " / 月（税込）";
       document.getElementById("quotePlanSummary").innerHTML = "プラン: <strong>" + label + "</strong>";
       document.getElementById("quoteError").style.display = "none";
       document.getElementById("quoteCompany").value = "";
@@ -1441,7 +1443,7 @@
       submitBtn.disabled = true;
       submitBtn.textContent = "PDF\u751F\u6210\u4E2D...";
 
-      var unitPrice = quotePlan === "yearly" ? 24000 : 2000;
+      var unitPrice = quotePlan === "yearly" ? PRICE_YEARLY : PRICE_MONTHLY;
       var planLabel = quotePlan === "yearly" ? "\u5E74\u984D\u30E9\u30A4\u30BB\u30F3\u30B9" : "\u6708\u984D\u30E9\u30A4\u30BB\u30F3\u30B9";
       var periodLabel = quotePlan === "yearly" ? "/ \u5E74" : "/ \u6708";
 
